@@ -13,12 +13,12 @@ public class Goal : MonoBehaviour
             if(!isLeftGoal)
             {
                 Debug.Log($"Left Player Scored!");
-                GameObject.Find("GameManager").GetComponent<GameManager>().LeftScored();
+                GameObject.Find("Game Manager").GetComponent<GameManager>().LeftScored();
             }
             else
             {
                 Debug.Log($"Right Player Scored!");
-                GameObject.Find("GameManager").GetComponent<GameManager>().RightScored();
+                GameObject.Find("Game Manager").GetComponent<GameManager>().RightScored();
             }
         }
     }
