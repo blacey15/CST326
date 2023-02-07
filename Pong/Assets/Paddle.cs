@@ -34,23 +34,23 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     Debug.Log($"we hit {collision.gameObject.name}");
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"we hit {collision.gameObject.name}");
 
-    //     //get reference to paddle collider
-    //     BoxCollider bc = GetComponent<BoxCollider>();
-    //     Bounds bounds = bc.bounds;
-    //     float maxX = bounds.max.x;
-    //     float minX = bounds.min.x;
+        //get reference to paddle collider
+        BoxCollider bc = GetComponent<BoxCollider>();
+        Bounds bounds = bc.bounds;
+        float maxX = bounds.max.x;
+        float minX = bounds.min.x;
 
-    //     // Debug.Log($"MaxX = {maxX}, minX = {minX}");
-    //     // Debug.Log($"x pos of ball is {}");
+        // Debug.Log($"MaxX = {maxX}, minX = {minX}");
+        // Debug.Log($"x pos of ball is {}");
 
-    //     Quaternion rotation = Quaternion.Euler(0f, 0f, 60f);
-    //     Vector3 bounceDirection = rotation * Vector3.up;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, 60f);
+        Vector3 bounceDirection = rotation * Vector3.up;
         
-    //     Rigidbody rb = collision.rigidbody;
-    //     rb.AddForce(bounceDirection * 1000, ForceMode.Force);
-    // }
+        Rigidbody rb = collision.rigidbody;
+        rb.AddForce(bounceDirection * 1000, ForceMode.Force);
+    }
 }
