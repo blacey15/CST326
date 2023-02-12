@@ -8,9 +8,12 @@ public class Ball : MonoBehaviour
     public float speed = 4f;
     public Rigidbody rb;
     public Vector3 startPos;
+
+    private AudioSource bounce;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        bounce = GetComponent<AudioSource>();
         startPos = transform.position;
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -39,5 +42,6 @@ public class Ball : MonoBehaviour
         float speed2 = vec.magnitude;
         var direction = Vector3.Reflect(vec.normalized, collision.contacts[0].normal);
         GetComponent<Rigidbody>().velocity = direction * speed2;
+        bounce.Play();
     }
 }
