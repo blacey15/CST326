@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     Vector3 vec;
-    public float speed = 4f;
+    public float speed = 6f;
     public Rigidbody rb;
     public Vector3 startPos;
 
@@ -34,6 +34,7 @@ public class Ball : MonoBehaviour
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
 
+        speed = 4f;
         GetComponent<Rigidbody>().velocity = new Vector3 (speed * x, speed * y, 0f);
     }
 
@@ -41,7 +42,21 @@ public class Ball : MonoBehaviour
     {
         float speed2 = vec.magnitude;
         var direction = Vector3.Reflect(vec.normalized, collision.contacts[0].normal);
-        GetComponent<Rigidbody>().velocity = direction * speed2;
+        GetComponent<Rigidbody>().velocity = direction * speed;
         bounce.Play();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("PowerUp"))
+        {
+            other.gameObject.SetActive(false);
+            speed++;
+        }
+        if(other.gameObject.CompareTag("PowerDown"))
+        {
+            other.gameObject.SetActive(false);
+            speed--;
+        }
     }
 }
