@@ -24,7 +24,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "preferences.environmentSetup",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -57,6 +57,7 @@
       <updated>1676430190022</updated>
       <workItem from="1676430193116" duration="2700000" />
       <workItem from="1676671675584" duration="2309000" />
+      <workItem from="1677031912019" duration="2264000" />
     </task>
     <servers />
   </component>
