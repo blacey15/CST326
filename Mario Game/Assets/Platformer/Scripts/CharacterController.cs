@@ -8,35 +8,42 @@ public class CharacterController : MonoBehaviour
 	public float maxSpeed = 3f;
 	public float jumpForce = 10f;
 	public float jumpBoost = 5f;
-	public bool isGrounded;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+	public bool feetOnGround = false;
+	
     void Update()
     {
-        float horizontalAxis = Input.GetAxis("Horizontal");
+	    Bounds bounds = GetComponent<Collider>().bounds;
+	    feetOnGround = Physics.Raycast(transform.position, Vector3.down, bounds.extents.y + 0.1f);
+	    
+        var axis = Input.GetAxis("Horizontal");
 		Rigidbody rbody = GetComponent<Rigidbody>();
-		rbody.velocity += horizontalAxis * Vector3.right * Time.deltaTime * acceleration;
-
-		Collider col = GetComponent<Collider>();
-		float halfHeight = col.bounds.extents.y + 0.03f;
-
-		isGrounded = Physics.Raycast(transform.position, Vector3.down, halfHeight);
-
-		rbody.velocity = new Vector3(Mathf.Clamp(rbody.velocity.x, -maxSpeed, maxSpeed),rbody.velocity.y, rbody.velocity.z);
-
-		if(isGrounded && Input.GetKeyDown(KeyCode.Space))
+		rbody.AddForce(Vector3.right * axis * acceleration, ForceMode.Force);
+		
+		if(feetOnGround && Input.GetKeyDown(KeyCode.Space))
 		{
 			rbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		else if (Input.GetKey(KeyCode.Space))
 		{
 			rbody.AddForce(Vector3.up * jumpBoost, ForceMode.Force);
 		}
+		
+		float xVelocity = Mathf.Clamp(rbody.velocity.x, -maxSpeed, maxSpeed);
+
+		if (Mathf.Abs(axis) < 0.1f)
+		{
+			xVelocity *= 0.9f;
+		}
+
+		rbody.velocity = new Vector3(xVelocity, rbody.velocity.y, rbody.velocity.z);
+
+		float speed = rbody.velocity.magnitude;
+
+		GetComponent<Animator>().SetFloat("Speed", speed);
+
+		//isGrounded = Physics.Raycast(transform.position, Vector3.down, halfHeight);
+		//Collider col = GetComponent<Collider>();
+		//float halfHeight = col.bounds.extents.y + 0.03f;
     }
 }
