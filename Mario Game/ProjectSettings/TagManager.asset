@@ -8,6 +8,8 @@ TagManager:
   - Question
   - Stone
   - Brick
+  - Lava
+  - Mario
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
@@ -40,7 +41,11 @@ public class CharacterController : MonoBehaviour
 
 		float speed = rbody.velocity.magnitude;
 
-		GetComponent<Animator>().SetFloat("Speed", speed);
+		Animator animator = GetComponent<Animator>();
+		animator.SetFloat("Speed", speed);
+		animator.SetBool("Jumping", !feetOnGround);
+
+		Debug.DrawRay(transform.position, Vector3.down, Color.red, 0.1f, true);
 
 		//isGrounded = Physics.Raycast(transform.position, Vector3.down, halfHeight);
 		//Collider col = GetComponent<Collider>();
