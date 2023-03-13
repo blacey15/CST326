@@ -6,9 +6,10 @@ public class Player : MonoBehaviour
     public float speed = 1f;
     public Bullet laserPrefab;
     private bool bulletActive;
+    public AudioSource shoot;
     void Start()
     {
-      
+        shoot = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
+            
         }
     }
 
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
             Bullet bullet = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             bullet.destroyed += bulletDestroyed;
             bulletActive = true;
+            shoot.Play();
         }
     }
 

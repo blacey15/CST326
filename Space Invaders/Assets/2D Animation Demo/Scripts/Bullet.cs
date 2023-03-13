@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public System.Action destroyed;
     private PointManager pointManager;
 
-   void Start()
+    void Awake()
    {
        pointManager = GameObject.Find("PointManager").GetComponent<PointManager>();
    }
@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.CompareTag("Invader"))
         {
             pointManager.updateScore(10);
+            //blowUp.Play();
         }
         if (col.gameObject.CompareTag("Invader2"))
         {
@@ -41,5 +42,6 @@ public class Bullet : MonoBehaviour
             pointManager.updateScore(30);
         }
         Destroy(gameObject);
+    
     }
 }

@@ -8,8 +8,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Pong/Assets/Goal.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2D Animation Demo/Scripts/Invader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2D Animation Demo/Scripts/Invaders.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2D Animation Demo/Scripts/PointManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2D Animation Demo/Scripts/StartGame.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -84,6 +87,7 @@
       <workItem from="1677889017928" duration="2675000" />
       <workItem from="1677892826543" duration="2728000" />
       <workItem from="1678134144976" duration="8663000" />
+      <workItem from="1678734077305" duration="6432000" />
     </task>
     <servers />
   </component>
