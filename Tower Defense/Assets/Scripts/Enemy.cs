@@ -2,67 +2,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 10f;
+    public float startSpeed = 10f;
+    [HideInInspector]
+    public float speed;
 
-    public int health = 100;
-    public int value = 50;
+    public float startHealth = 100;
+    private float health;
+    
+    public int worth = 50;
 
     public GameObject deathEffect;
 
-    private Transform target;
-    private int wavepointIndex = 0;
+    [Header("Unity Stuff")]
+    public Image healthBar;
+
+    private bool isDead = false;
 
     void Start()
     {
-        target = Waypoints.waypoints[0];
+        speed = startSpeed;
+        health = startHealth;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         health -= amount;
+        healthBar.fillAmount = health / startHealth;
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
             Die();
         }
     }
 
+    public void Slow(float pct)
+    {
+        speed = startSpeed * (1f - pct);
+    }
+
     void Die()
     {
+        isDead = true;
+        
+        PlayerStats.Money += worth;
+        
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
-        PlayerStats.Money += value;
-        Destroy(gameObject);
-    }
 
-    void Update()
-    {
-        Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
-        {
-            GetNextWaypoint();
-        }
-    }
-
-    void GetNextWaypoint()
-    {
-        if (wavepointIndex >= Waypoints.waypoints.Length - 1)
-        {
-            EndPath();
-            return;
-        }
-        wavepointIndex++;
-        target = Waypoints.waypoints[wavepointIndex];
-    }
-
-    void EndPath()
-    {
-        PlayerStats.Lives--;
+        WaveSpawner.EnemiesAlive--;
+        
         Destroy(gameObject);
     }
 }
